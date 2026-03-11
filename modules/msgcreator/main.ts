@@ -1,19 +1,19 @@
-
-
-interface UI_reng {
+interface MSG_text {
 	texts: string;
-	isTranslate?: boolean;
+	space?: boolean;
 }
-export class UI_Info {
-	texts: UI_reng[] = [];
+export class MSG_Creator {
+	texts: MSG_text[] = [];
 	composite() {
 		const str = [];
 		for (let i = 0; i < this.texts.length; i++) {
 			const t = this.texts[i];
-			if (t.isTranslate) {
-				str.push({ translate: t.texts });
-			} else {
-				str.push({ text: t.texts });
+
+			str.push({ translate: t.texts });
+
+			if (!t.space) {
+				str.push({ text: " " });
+				continue;
 			}
 			if (i < this.texts.length - 1) {
 				str.push({ text: "\n§r" });
@@ -21,31 +21,27 @@ export class UI_Info {
 		}
 		return str;
 	}
-	addText(text: string, isTranslate?: boolean) {
-		this.texts.push({ texts: text, isTranslate: isTranslate });
+	addText(text: string, space?: boolean) {
+		this.texts.push({ texts: text, space: space });
 	}
 }
 
-//EJEMPLO DE USO EN ACTIONBAR:
+// //ejemplo de Actionbar
+// system.runInterval(() => {
+// 	const player = world.getAllPlayers()[0];
+// 	if (player) {
+// 		const msg = new MSG_Creator();
+// 		const block = player.getBlockFromViewDirection({ maxDistance: 10 })?.block;
+// 		if (block) {
+// 			msg.addText(`§3Looking at block:§r ${block.typeId}`, true);
 
-// export function showDataDebugToPlayer() {
-//     for (const player of world.getPlayers({ tags: ["debug"] })) {
-//         const text = show_debug_data(player);
-//         if (text) {
-//             player.onScreenDisplay.setActionBar(text);
-//         }
-//     }
-// }
-// /**devulve la interfaz del usuario por renglones */
-// function show_debug_data(player: Player): {} | undefined {
-//     const ui = new UI_Info();
-//     ui.addText(`§aTExto1`);
-//     ui.addText(`§aTExto2`);
-//     if (player.hasTag("debug")) {
-//         ui.addText(`§aTExto debug`);
-//     }
-//     //si quieres usar un tranlate key
-//     ui.addText(`finearts:translate_key_example`, true);
-//
-//     return ui.composite();
-// }
+// 			msg.addText(
+// 				`§3location:§r x: ${block.location.x} y: ${block.location.y} z: ${block.location.z}`,
+// 				true,
+// 			);
+// 		}
+// 		msg.addText("finearts.this_is_a_test_text");
+
+// 		player.onScreenDisplay.setActionBar(msg.composite());
+// 	}
+// }, 1); // 20 ticks = 1 second
