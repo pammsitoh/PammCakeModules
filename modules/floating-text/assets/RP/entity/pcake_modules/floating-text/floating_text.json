@@ -1,0 +1,26 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:client_entity": {
+        "description": {
+            "identifier": "pcake_namespace:floating_text",
+            "materials": {
+                "default": "entity_custom"
+            },
+            "textures": {
+                "default": "textures/items/diamond"
+            },
+            "geometry": {
+                "default": "geometry.item_sprite"
+            },
+            "render_controllers": [
+                {
+                    "controller.render.item_sprite": "(0.0)"
+                }
+            ],
+            "spawn_egg": {
+                "base_color": "#288483",
+                "overlay_color": "#2B7135"
+            }
+        }
+    }
+}
