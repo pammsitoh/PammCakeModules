@@ -23,6 +23,7 @@ export class MSG_Creator {
 	}
 	addText(text: string, space?: boolean) {
 		this.texts.push({ texts: text, space: space });
+		return this;
 	}
 }
 
